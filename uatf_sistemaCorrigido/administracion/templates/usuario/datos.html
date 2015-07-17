@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% block title %}.:Perfil Usuario:.{% endblock %}
+{% block contenidos %}
+<style type="text/css">
+    #leftt{
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+            function ventanaSecundaria(URL){
+                window.open(URL,"Editar","width=300,height=300,scrollbars=NO")
+            }
+        </script>    
+<div>
+<head>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/forNuevo.css">
+<!-- <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap.min.css"> -->
+    
+<style type="text/css">
+    #leftt{
+        display: none;
+    }
+</style>
+
+  </head>
+  <body class="valign-wrapper2">
+      <div class="container expand-on-small-only">
+          
+<div class="row valign">
+    <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+            <form method="POST" action=""> {% csrf_token %}
+                <div class="card-content">
+                    <h5>Nombre De Usuario</h5>
+ 
+<div class="row">
+    {% for info in dato %}
+        {% for user in usuario %}
+            {% if info.usuario_id == user.id %}
+    <div id="id_username_container" class="input-field col s12 required ">
+        <i class="mdi-action-account-box prefix"></i>
+ <input type="text" class="validate" value="{{user.username}}" name="username" id="id_username" onfocus="this.blur()">
+        
+        <label for="id_username" class="control-label ">Username</label>
+        
+    </div>
+</div>   
+<div class="row">
+    
+    <div class="col s12 m6">
+        
+<div class="row">
+    <div id="id_password_container" class="input-field col s12 required ">
+        <i class="mdi-action-lock-open prefix"></i>
+        <input type="password" class="validate" value='{{user.password1}}' name="password1" id="id_password">
+        
+        <label for="id_password" class="control-label ">Password</label>
+        
+    </div>
+</div>
+
+    </div>
+    
+    <div class="col s12 m6">
+        
+<div class="row">
+    <div id="id_password_confirm_container" class="input-field col s12 required ">
+        
+        <input type="password" class="validate " name="password2" id="id_password_confirm">
+        
+        <label for="id_password_confirm" class="control-label ">Confirm password</label>
+        
+    </div>
+</div>
+
+    </div>
+    
+</div>    
+<div class="section">
+    <h5>Datos Personales</h5> 
+<div class="row">
+    
+    <div class="col s12 m6">
+        
+<div class="row">
+    <div id="id_first_name_container" class="input-field col s12 ">
+        
+        <input type="text" class="validate" value="{{user.first_name}}" name="nombre" id="id_first_name" onfocus="this.blur()">
+        
+        <label for="id_first_name" class="control-label ">Nombres</label>
+        
+    </div>
+</div>
+    </div>
+                <div class="col s12 m6">
+        
+                    <div class="row">
+                        <div id="id_last_name_container" class="input-field col s12 ">
+                            
+                            <input type="text" class="validate" value="{{user.last_name}}" name="apellido" id="id_last_name" onfocus="this.blur()">
+                            
+                            <label for="id_last_name" class="control-label ">Apellido</label>
+                            
+                        </div>
+                    </div>
+
+                  <!--   <div class="col s12 m6">
+                    <div class="row">
+                        <div id="id_last_name_container" class="input-field col s12 required ">
+                            <i class="mdi-communication-email prefix"></i>
+                            <input type="text" class="validate" value="{{info.telefono}}" name="telefono" id="id_email">
+                            
+                            <label for="id_email" class="control-label ">Numero de tel o celular</label>
+                            
+                        </div>
+                    </div>
+                </div> -->
+                </div>
+                    <div class="col s12 m6">
+                    <div class="row">
+                        <div id="id_first_name_container" class="input-field col s12 required ">
+                            <i class="mdi-communication-email prefix"></i>
+          <input type="text" class="validate" value="{{info.ci}}" name="ci" id="id_email" onfocus="this.blur()">
+                            
+                            <label for="id_email" class="control-label ">Numero de Ci</label>
+                            
+                        </div>
+                    </div>
+                    </div>
+    
+            </div>
+        </div>
+
+        </div>
+                <div class="card-action">
+                    <div class="right">
+<a class="waves-effect waves-light btn" href="javascript:ventanaSecundaria('/editarperfil/')">Editar Datos</a>
+                    <a class="waves-effect waves-light btn" href="/editarcon/">Editar Password</a>
+                    <!--  <button class="waves-effect waves-light btn" type="submit">Guardar</button> -->
+                
+                     {% endif %}
+              {% endfor %}
+        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+      </div>
+<script type="text/javascript">
+    if (navigator.appVersion.indexOf("Win")!=-1) {
+        document.write('<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/robotofix.css">');
+    }
+
+    $(function() {
+        $('.dropdown-button').dropdown({hover: false});
+        $(".button-collapse").sideNav();
+        $('select').not('.disabled').not('.material-ignore').material_select();
+
+        $('[data-form-control="date"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), timepicker:false, mask:false});
+        });
+        $('[data-form-control="time"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), datepicker: false, timepicker:true, mask:false});
+        });
+        $('[data-form-control="datetime"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), datepicker: true, timepicker:true, mask:false});
+        });
+
+
+        /*
+          In chrome, there is no way to get to know is autofill
+          fills the password field until user is interacted. Assume
+          that it is
+        */
+        if($('input[type=password]').length) {
+            function autofix() {
+                $('input[type=password]').addClass('active').addClass('valid');
+                $('input[type=password]').next('label').addClass('active').addClass('valid');
+                $('input[type=password]').prev('i').addClass('active');
+                userInteracted();
+            }
+
+            function userInteracted() {
+                $('body').off('input propertychange', 'input[type=text]', autofix);
+                $('body').off('input propertychange', 'input[type=email]', autofix);
+                $('body,html').unbind("scroll mousedown DOMMouseScroll mousewheel keyup", userInteracted);
+            }
+
+            $('body').on('input propertychange', 'input[type=text]', autofix);
+            $('body').on('input propertychange', 'input[type=email]', autofix);
+            $("body,html").bind("scroll mousedown DOMMouseScroll mousewheel keyup", userInteracted);
+        }
+    });
+</script>
+
+</div>
+{% endblock %}
